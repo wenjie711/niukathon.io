@@ -6,13 +6,31 @@ A high-productivity web framework for the [Go language](http://www.golang.org/).
 
 ### Start the web server:
 
-    revel run myapp
+    revel run github.com/{name}/niukathon.io
 
    Run with <tt>--help</tt> for options.
 
-### Go to http://localhost:9000/ and you'll see:
+### Go to http://localhost:9017/ and you'll see:
 
 "It works"
+
+
+### nginx配置
+
+    server {
+        listen 80;
+        server_name niukathon.io;
+        location / {
+                    proxy_pass http://localhost:9017;
+        }
+    }
+
+修改本地hosts文件(/etc/hosts):
+
+    127.0.0.1 niukathon.io
+
+    
+
 
 ### Description of Contents
 
