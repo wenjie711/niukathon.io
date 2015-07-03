@@ -11,13 +11,7 @@ var (
 	engine *xorm.Engine
 )
 
-var CONFIG = &oauth.Config{
-	ClientId:     "95341411595",
-	ClientSecret: "8eff1b488da7fe3426f9ecaf8de1ba54",
-	AuthURL:      "http://account.qiniu.com/oauth/authorize",
-	TokenURL:     "http://account.qiniu.com/oauth/token",
-	RedirectURL:  "http://app1.qiniu.com:9011/Application/Auth",
-}
+var github *oauth.Config
 
 type App struct {
 	*revel.Controller
@@ -26,8 +20,12 @@ type App struct {
 func (c *App) checkUser() revel.Result {
 	user := c.user()
 	if user != nil {
-		c.RenderArgs["user"] = user
+		user = new(models.User)
 	}
+	c.RenderArgs["user"] = user
+
+	c.RenderArgs["github"] = github.AuthCodeURL("haha")
+	revel.INFO.Println(c.RenderArgs["github"])
 	revel.INFO.Println("guest", GUEST, "member", MEMBER, user)
 	if needCheck, ok := actionPermissions[c.Action]; ok && needCheck > GUEST && user == nil {
 		c.Flash.Error("请先登录")
@@ -43,13 +41,24 @@ func (c *App) user() *models.User {
 	}
 
 	if username, ok := c.Session["user"]; ok {
-		return c.getUser(username)
+		return c.getUserFromDB(username)
+	}
+
+	// TODO user login
+	if access_token, ok := c.Session["access_token"]; ok {
+		user, err := models.GithubAuthenticated(access_token)
+		if err != nil {
+			return nil
+		} else {
+			c.Session["user"] = user.Username
+			return user
+		}
 	}
 
 	return nil
 }
 
-func (c *App) getUser(username string) *models.User {
+func (c *App) getUserFromDB(username string) *models.User {
 	var user models.User
 	has, _ := engine.Where("username = ?", username).Get(&user)
 	if !has {

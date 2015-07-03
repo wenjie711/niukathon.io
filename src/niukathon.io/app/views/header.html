@@ -76,7 +76,7 @@
                     <!-- End Header Inner Right -->
                 </div>
 
-                {{if .isLogin}}
+                {{if .user.Login }}
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-responsive-collapse">
                     <div class="menu-container">
@@ -84,18 +84,14 @@
                             <!-- Home -->
                             <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    {{.username}}
+                                    {{.user.Username}}
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <!-- <li><a href="index.html">个人中心</a></li> -->
-                                    <li><a href="/account/user/password">修改密码</a></li>
-                                </ul>
                             </li>
                             <!-- End Home -->
 
                             <!-- Home -->
                             <li class="dropdown">
-                                <a href="/account/logout">
+                                <a href="/signout">
                                     退出
                                 </a>
                             </li>
@@ -104,6 +100,11 @@
                         </ul>
                     </div>
                 </div><!--/navbar-collapse-->
+                {{else}}
+                <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{.github}}">Github SignIn</a></li>
+            <li><a href="../navbar-static-top/">QQ Signin</a></li>
+          </ul>
                 {{end}}
             </div>
         </div>

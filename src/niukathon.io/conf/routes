@@ -12,6 +12,8 @@ DELETE /signout                                 User.Signout
 
 GET    /profile                                 User.MyProfile
 
+GET     /oauth/github                           User.GithubCallBack
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
