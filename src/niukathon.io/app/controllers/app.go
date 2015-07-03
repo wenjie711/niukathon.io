@@ -65,11 +65,3 @@ func (c *App) getUserFromDB(username string) *models.User {
 
 	return &user
 }
-
-func (c *App) Index() revel.Result {
-	return c.Render()
-}
-
-func (c *App) Hello() revel.Result {
-	return nil
-}

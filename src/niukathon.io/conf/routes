@@ -4,8 +4,7 @@
 
 module:testrunner
 
-GET     /                                       App.Index
-GET     /hello                                  App.Hello
+GET     /                                       Site.Index
 
 GET    /signin                                  User.Signin
 DELETE /signout                                 User.Signout

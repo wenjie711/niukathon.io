@@ -11,5 +11,4 @@ var actionPermissions = map[string]int{
 	"User.Signout":        GUEST,
 	"User.MyProfile":      MEMBER,
 	"User.GithubCallBack": GUEST,
-	"App.Hello":           MEMBER,
 }

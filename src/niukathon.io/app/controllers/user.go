@@ -32,5 +32,5 @@ func (c *User) SignOut() revel.Result {
 }
 
 func (c *User) MyProfile() revel.Result {
-	return nil
+	return c.Render()
 }
