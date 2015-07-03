@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<!-- CSS Global Compulsory -->
+{{append . "moreStyles" "css/bootstrap.min.css"}}
+{{append . "moreStyles" "css/unify/basic/style.css"}}
+
+<!-- CSS Header and Footer -->
+{{append . "moreStyles" "css/unify/header-v6.css"}}
+{{append . "moreStyles" "css/unify/footer-v2.css"}}
+
+<!-- CSS Implementing Plugins -->
+{{append . "moreStyles" "css/unify/animate.css"}}
+{{append . "moreStyles" "css/unify/line-icons/line-icons.css"}}
+{{append . "moreStyles" "css/unify/font-awesome/font-awesome.min.css"}}
+
+<!-- CSS Page Style -->
+
+<!-- js -->
+{{append . "moreScripts" "js/jquery.min.js"}}
+{{append . "moreScripts" "js/bootstrap.min.js"}}
+
+<html>
+  <head>
+    <title>{{.title}}</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" type="image/png" href="/public/img/favicon.ico">
+
+    <!-- Web Fonts -->
+    <!-- <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin"> -->
+    <!-- 下面是bootcss提供的cdn加速基础css和js -->
+
+    <!-- 下面是本地的css和js文件添加代码 -->
+    {{range .moreStyles}}
+      <link rel="stylesheet" type="text/css" href="/public/{{.}}">
+    {{end}}
+    {{range .moreScripts}}
+      <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
+    {{end}}
+
+  </head>
+
+  <body class="header-fixed header-fixed-space">
+    <!--=== Header ===-->
+    <div class="header-v6 header-classic-white header-sticky  header-fixed-shrink">
+        <!-- Navbar -->
+        <div class="navbar mega-menu" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="menu-container">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Navbar Brand -->
+                    <div class="navbar-brand">
+                        <a href="/">
+                            <img class="shrink-logo" src="/public/img/logo-title-h-54.png" alt="Logo">
+                        </a>
+                    </div>
+                    <!-- ENd Navbar Brand -->
+
+                    <!-- Header Inner Right -->
+                    <div class="header-inner-right">
+                        <ul class="menu-icons-list">
+                        </ul>
+                    </div>
+                    <!-- End Header Inner Right -->
+                </div>
+
+                {{if .user.Login }}
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-responsive-collapse">
+                    <div class="menu-container">
+                        <ul class="nav navbar-nav">
+                            <!-- Home -->
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    {{.user.Username}}
+                                </a>
+                            </li>
+                            <!-- End Home -->
+
+                            <!-- Home -->
+                            <li class="dropdown">
+                                <a href="/signout">
+                                    退出
+                                </a>
+                            </li>
+                            <!-- End Home -->
+
+                        </ul>
+                    </div>
+                </div><!--/navbar-collapse-->
+                {{else}}
+                <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{.github}}">Github SignIn</a></li>
+            <li><a href="../navbar-static-top/">QQ Signin</a></li>
+          </ul>
+                {{end}}
+            </div>
+        </div>
+        <!-- End Navbar -->
+    </div>
+    <!--=== End Header v6 ===-->
