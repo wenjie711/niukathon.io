@@ -19,14 +19,13 @@ type App struct {
 
 func (c *App) checkUser() revel.Result {
 	user := c.user()
-	if user != nil {
+	if user == nil {
 		user = new(models.User)
 	}
+	revel.INFO.Println(user)
 	c.RenderArgs["user"] = user
 
 	c.RenderArgs["github"] = github.AuthCodeURL("haha")
-	revel.INFO.Println(c.RenderArgs["github"])
-	revel.INFO.Println("guest", GUEST, "member", MEMBER, user)
 	if needCheck, ok := actionPermissions[c.Action]; ok && needCheck > GUEST && user == nil {
 		c.Flash.Error("请先登录")
 		return c.Redirect("/signin?continue=%s", c.Request.Request.URL.String())
@@ -44,7 +43,6 @@ func (c *App) user() *models.User {
 		return c.getUserFromDB(username)
 	}
 
-	// TODO user login
 	if access_token, ok := c.Session["access_token"]; ok {
 		user, err := models.GithubAuthenticated(access_token)
 		if err != nil {
