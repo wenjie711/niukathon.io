@@ -32,14 +32,14 @@ func Init() {
 
 	Engine.ShowSQL = true
 
-	/*err = Engine.Sync(
-		new(Team),
-		new(Event),
-		new(User),
-	)
+	// err = Engine.Sync(
+	// 	new(Team),
+	// 	new(Event),
+	// 	new(User),
+	// )
 
-	if err != nil {
-		panic(err)
-	}
-	*/
+	// if err != nil {
+	// 	panic(err)
+	// }
+
 }

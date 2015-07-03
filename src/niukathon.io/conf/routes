@@ -25,3 +25,9 @@ GET     /public/*filepath                       Static.Serve("public")
 
 # Catch all
 *       /:controller/:action                    :controller.:action
+
+
+
+# Team Routes Configuration
+
+GET     /team                                   Team.GetTeam
